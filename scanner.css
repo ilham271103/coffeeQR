@@ -1,0 +1,128 @@
+*{box-sizing:border-box}
+body{margin:0;padding:8px;background:#e5ddd5;color:#35251b;font-family:Arial,sans-serif}
+main{max-width:620px;margin:auto;padding:24px 18px 30px;border-radius:36px;background:linear-gradient(135deg,#faf6f1,#efe7df);border:1px solid #ded3c8}
+.page-header{position:relative;text-align:center;padding:0 42px 28px}
+h1{font:bold clamp(26px,5.6vw,36px)/1.25 Georgia,serif;margin:0 0 8px}
+.page-header p{font-size:clamp(13px,2.8vw,18px);color:#7c6d62;margin:0;line-height:1.5}
+.back{position:absolute;left:0;top:0;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#eee5dc;border:1px solid #e5d9cf;color:#493022}
+svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.camera-panel{position:relative;height:clamp(340px,65svh,800px);border-radius:28px;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#514235,#201b16 80%)}
+#reader{width:100%;height:100%;overflow:hidden;border:0!important}
+#reader video{width:100%!important;height:100%!important;object-fit:cover}
+#reader img{object-fit:contain}
+.scan-frame{pointer-events:none;position:absolute;width:min(70%,42svh);aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+.scan-corners{display:block;width:100%;height:100%;stroke:#f4cfa9;stroke-width:5;stroke-linecap:round;fill:none}
+.scan-line{position:absolute;left:0;right:0;top:50%;height:4px;border-radius:9px;background:#ffd8aa;box-shadow:0 0 12px #ff9f48,0 0 25px #ff9f4877;opacity:.8;animation:sweep 2.6s ease-in-out infinite}
+.is-scanning .scan-line{opacity:1}
+.scan-complete .scan-line{animation-play-state:paused;opacity:0}
+.camera-controls{margin-top:16px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.browser-button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #d9c5b2;border-radius:24px;padding:11px 18px;color:#493022;background:#eee3d7;font-size:14px;font-weight:600}
+.browser-help{margin-top:12px;color:#796657;font-size:13px;line-height:1.5}
+.browser-help summary{cursor:pointer;text-align:center}
+.browser-help p{margin:10px 0}
+#browser-url{width:100%;padding:10px;border:1px solid #d9c5b2;border-radius:8px;background:#fffaf5;color:#493022;font:inherit}
+#copy-url{margin-top:8px;padding:8px 14px;font-size:13px}
+button{border:0;border-radius:24px;padding:13px 22px;font:600 15px/1.4 Arial,sans-serif;cursor:pointer;background:#f4dfc9;color:#402b1d}
+.secondary{background:#211810aa;color:#fff4e8;border:1px solid #fff4e844;font-size:12px}
+button:disabled{opacity:.5;cursor:default}
+.scan-status{display:flex;align-items:center;justify-content:center;gap:12px;min-height:72px;padding:16px 8px}
+#message{margin:0;font-size:16px;line-height:1.5}
+.status-icon{flex:0 0 24px;height:24px;border:3px solid #d7c9bb;border-top-color:#483223;border-right-color:#483223;border-radius:50%}
+.is-scanning .status-icon{animation:spin 1s linear infinite}
+.upload{position:relative;display:flex;align-items:center;gap:16px;border:1.5px solid #e3d7cc;border-radius:24px;padding:18px;background:#eee6deaa;cursor:pointer}
+.gallery-icon{width:60px;height:60px;flex-shrink:0;display:grid;place-items:center;background:#e7dbcf;border-radius:50%;color:#503727}
+.gallery-icon svg{width:30px;height:30px}
+.gallery-copy{display:grid;gap:6px}
+.gallery-copy strong{font-size:clamp(16px,3.4vw,22px)}
+.gallery-copy span{color:#857466;font-size:15px;line-height:1.4}
+.chevron{margin-left:auto;flex-shrink:0;width:20px;color:#8b7767}
+#file{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.upload:focus-within,:focus-visible{outline:3px solid #ad774f;outline-offset:4px}
+.upload:has(input:disabled){opacity:.5}
+#result{margin-top:20px;padding:20px;background:#e9dfd3;border-radius:20px}
+h2{margin:0;font:bold 23px Georgia,serif}
+#voucher{overflow-wrap:anywhere;font-weight:700}
+[hidden]{display:none!important}
+@keyframes sweep{0%,100%{top:15%}
+50%{top:85%}
+}
+@keyframes spin{to{transform:rotate(360deg)}
+}
+@media(max-width:420px){body{padding:5px}
+main{padding:20px 12px;border-radius:28px}
+.page-header{padding:0 35px 22px}
+.back{width:36px;height:36px}
+.upload{padding:14px;gap:12px}
+.gallery-icon{width:48px;height:48px}
+.gallery-copy span{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}
+}
+
+/* Give desktop cameras a landscape preview and keep the gallery beside it. */
+@media (min-width: 900px) {
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    align-items: center;
+    padding: 24px;
+  }
+  main {
+    width: 100%;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    gap: 16px 24px;
+    padding: 24px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px #35251b12;
+  }
+  .page-header {
+    grid-column: 1 / -1;
+    padding: 2px 64px 8px;
+  }
+  h1 { font-size: 32px; }
+  .page-header p { font-size: 16px; }
+  .back { width: 46px; height: 46px; }
+  .camera-panel {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    height: 280px;
+    border-radius: 22px;
+  }
+  #reader video { object-fit: contain; }
+  .scan-frame { width: min(55%, 170px); top: 50%; }
+  .camera-controls { grid-column: 1; grid-row: 5; margin-top: 0; }
+  .actions button { padding: 11px 20px; font-size: 14px; }
+  .scan-status {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-start;
+    align-self: start;
+    min-height: 0;
+    padding: 12px 0 0;
+  }
+  #message { font-size: 16px; }
+  .upload {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: start;
+    border-radius: 18px;
+    padding: 18px 14px;
+    gap: 12px;
+    transition: background .2s, border-color .2s;
+  }
+  .upload:hover { background: #e8dbcd; border-color: #cbb7a4; }
+  .gallery-icon { width: 46px; height: 46px; }
+  .gallery-icon svg { width: 25px; height: 25px; }
+  .gallery-copy { min-width: 0; }
+  .gallery-copy strong { font-size: 17px; line-height: 1.4; }
+  .gallery-copy span { font-size: 13px; }
+  .chevron { width: 16px; }
+  #result { grid-column: 2; grid-row: 4; align-self: start; margin: 0; padding: 18px; }
+  h2 { font-size: 21px; }
+}
+

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Scan Voucher — Kopi Senja</title>
+  <link rel="stylesheet" href="scanner.css?v=animation6">
+  <script defer src="vendor/html5-qrcode.min.js"></script>
+  <script defer src="config.js"></script>
+  <script defer src="browser.js?v=2"></script>
+  <script defer src="scanner.js?v=camera11"></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a id="back" class="back" href="#" aria-label="Kembali ke login"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h13"/></svg></a>
+      <h1>Scan Voucher</h1>
+      <p>Arahkan kamera ke QR Code voucher kamu</p>
+    </header>
+    <div class="camera-panel">
+      <div id="reader" aria-label="Pratinjau scanner QR"></div>
+      <div class="scan-frame" aria-hidden="true">
+        <svg class="scan-corners" viewBox="0 0 240 240"><path d="M36 3H21A18 18 0 0 0 3 21V36 M204 3H219A18 18 0 0 1 237 21V36 M3 204V219A18 18 0 0 0 21 237H36 M204 237H219A18 18 0 0 0 237 219V204"/></svg>
+        <span class="scan-line"></span>
+      </div>
+    </div>
+    <div class="camera-controls">
+      <div class="actions">
+        <button id="start" type="button">Buka kamera</button>
+        <button id="stop" class="secondary" type="button" disabled hidden>Hentikan kamera</button>
+        <a id="open-browser" class="browser-button" href="./" target="_blank" rel="noopener noreferrer">Buka di browser ?</a>
+      </div>
+      <details class="browser-help">
+        <summary>Browser tidak terbuka?</summary>
+        <p>Salin tautan ini lalu tempel di Chrome atau Safari. Tetap terhubung ke Wi-Fi hotspot.</p>
+        <input id="browser-url" type="text" readonly aria-label="Tautan scanner">
+        <button id="copy-url" type="button">Salin tautan</button>
+        <p id="browser-message" role="status" aria-live="polite"></p>
+      </details>
+    </div>
+    <div class="scan-status"><span class="status-icon" aria-hidden="true"></span><p id="message" role="status" aria-live="polite">Menyiapkan kamera...</p></div>
+    <label class="upload">
+      <span class="gallery-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg></span>
+      <span class="gallery-copy"><strong>Ambil foto dari galeri</strong><span>Pilih foto QR voucher kamu</span></span>
+      <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      <input id="file" type="file" accept="image/*" aria-label="Ambil foto dari galeri">
+    </label>
+    <section id="result" hidden>
+      <h2>Voucher ditemukan</h2>
+      <p id="voucher"></p>
+      <button id="continue" type="button">Gunakan voucher</button>
+    </section>
+  </main>
+</body>
+</html>
