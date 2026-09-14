@@ -35,17 +35,21 @@
     return;
   }
   scanner = new Html5Qrcode('reader', { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE], verbose: false });
+  function cameraRunning() {
+    var state = scanner.getState();
+    return state === Html5QrcodeScannerState.SCANNING || state === Html5QrcodeScannerState.PAUSED;
+  }
   function controls() {
-    document.body.classList.toggle('is-scanning', !!scanner.isScanning);
+    document.body.classList.toggle('is-scanning', !!cameraRunning());
     document.body.classList.toggle('scan-complete', accepted);
-    start.hidden = !!scanner.isScanning;
-    stop.hidden = !scanner.isScanning;
-    start.disabled = busy || scanner.isScanning;
-    stop.disabled = busy || !scanner.isScanning;
+    start.hidden = !!cameraRunning();
+    stop.hidden = !cameraRunning();
+    start.disabled = busy || cameraRunning();
+    stop.disabled = busy || !cameraRunning();
     file.disabled = busy;
   }
   async function halt() {
-    if (scanner.isScanning) await scanner.stop();
+    if (cameraRunning()) await scanner.stop();
   }
   function releasePreviewTracks() {
     // Release this page's camera even if start failed before isScanning became true.
@@ -86,7 +90,7 @@
     if (loginUrl) connect();
   }
   async function openCamera() {
-    if (busy || scanner.isScanning || leaving || document.hidden) return;
+    if (busy || cameraRunning() || leaving || document.hidden) return;
     if (!window.isSecureContext || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       message.textContent = 'Kamera membutuhkan HTTPS. Buka alamat GitHub Pages atau pilih gambar QR.';
       return;
