@@ -57,7 +57,10 @@ main{padding:20px 12px;border-radius:28px}
 .gallery-icon{width:48px;height:48px}
 .gallery-copy span{font-size:13px}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important}
+/* Keep the activity indicator visible; reduce decorative motion. */
+@media(prefers-reduced-motion:reduce){
+  .scan-line{animation:none!important}
+  .is-scanning .status-icon{animation:spin 2s linear infinite}
 }
 
 /* Give desktop cameras a landscape preview and keep the gallery beside it. */
