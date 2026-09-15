@@ -130,21 +130,24 @@ main{padding:20px 12px;border-radius:28px}
 }
 
 
-/* Shorter mobile preview; preserve the guide size and full camera image. */
+/* Compact mobile preview so gallery upload is reachable in the first view. */
 @media (max-width: 899px) {
-  main { padding-top: 14px; padding-bottom: 16px; }
-  .page-header { padding-bottom: 16px; }
+  main { padding: 12px 12px 14px; }
+  .page-header { padding-bottom: 12px; }
+  h1 { font-size: clamp(25px, 7vw, 32px); margin-bottom: 4px; }
+  .page-header p { font-size: 14px; line-height: 1.35; }
   .camera-panel {
-    height: clamp(260px, 40vh, 380px);
-    height: clamp(260px, 40svh, 380px);
-    min-height: min(70vw, 42svh);
-    border-radius: 22px;
+    height: clamp(210px, 32vh, 300px);
+    height: clamp(210px, 32svh, 300px);
+    border-radius: 20px;
   }
-  .camera-controls { margin-top: 10px; }
+  .scan-frame { width: min(62%, 210px, 32svh); }
+  .camera-controls { margin-top: 8px; }
   .actions { gap: 8px; }
-  .actions button, .browser-button { min-height: 44px; padding: 9px 14px; font-size: 13px; }
-  .browser-help { margin-top: 8px; }
-  .scan-status { min-height: 52px; padding: 10px 4px; gap: 10px; }
+  .actions button, .browser-button { min-height: 40px; padding: 8px 13px; font-size: 13px; }
+  .browser-help { margin-top: 6px; }
+  .scan-status { min-height: 44px; padding: 8px 4px; gap: 10px; }
+  .status-icon { flex-basis: 22px; height: 22px; }
   #message { font-size: 14px; }
   .upload { padding: 12px; gap: 12px; border-radius: 18px; }
   .gallery-icon { width: 44px; height: 44px; }
