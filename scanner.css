@@ -137,11 +137,16 @@ main{padding:20px 12px;border-radius:28px}
   h1 { font-size: clamp(25px, 7vw, 32px); margin-bottom: 4px; }
   .page-header p { font-size: 14px; line-height: 1.35; }
   .camera-panel {
-    height: clamp(210px, 32vh, 300px);
-    height: clamp(210px, 32svh, 300px);
+    width: min(100%, 300px, 76vw);
+    aspect-ratio: 1;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
     border-radius: 20px;
   }
-  .scan-frame { width: min(62%, 210px, 32svh); }
+  #reader { border-radius: 16px; }
+  #reader video { object-fit: cover; }
+  .scan-frame { width: calc(100% - 48px); }
   .camera-controls { margin-top: 8px; }
   .actions { gap: 8px; }
   .actions button, .browser-button { min-height: 40px; padding: 8px 13px; font-size: 13px; }
