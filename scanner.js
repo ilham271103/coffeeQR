@@ -103,9 +103,27 @@
     message.textContent = 'Meminta akses kamera…';
     try {
       // start() requests camera permission itself; a separate probe prompts twice.
-      await scanner.start({ facingMode: 'environment' }, { fps: 10, aspectRatio: 1 }, function (text) {
+      await scanner.start({ facingMode: 'environment' }, {
+        fps: 15,
+        videoConstraints: {
+          facingMode: { ideal: 'environment' },
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        }
+      }, function (text) {
         if (session === cameraSession && !leaving) decoded(text);
       }, function () {});
+      if (leaving || session !== cameraSession) { await halt(); return; }
+      // Focus is optional; unsupported controls must not interrupt scanning.
+      var video = document.querySelector('#reader video');
+      var stream = video && video.srcObject;
+      var track = stream && stream.getVideoTracks()[0];
+      try {
+        var capabilities = track && track.getCapabilities ? track.getCapabilities() : {};
+        if (capabilities.focusMode && capabilities.focusMode.indexOf('continuous') !== -1) {
+          await track.applyConstraints({ advanced: [{ focusMode: 'continuous' }] });
+        }
+      } catch (_) { /* Keep the camera's default focus when adjustment is rejected. */ }
       if (leaving || session !== cameraSession) { await halt(); return; }
       if (!accepted) message.textContent = 'Mencari QR Code...';
     } catch (error) {
