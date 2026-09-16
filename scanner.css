@@ -160,3 +160,33 @@ main{padding:20px 12px;border-radius:28px}
   .gallery-copy strong { font-size: 16px; }
   .gallery-copy span { font-size: 12px; }
 }
+
+/* Center the card with safe scrolling when its content exceeds the viewport. */
+body {
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+}
+main { flex-shrink:0; width:100%; margin:auto; }
+@media(max-width:899px) {
+  main { max-width:430px; padding:18px 16px; border-radius:26px; }
+  .page-header { padding:0 34px 16px; }
+  .back { width:36px; height:36px; }
+  .page-header p { margin:0 -20px; font-size:13px; }
+  .camera-panel { width:min(100%,300px,44svh); padding:8px; border-radius:20px; }
+  .camera-controls { margin-top:12px; }
+  .actions button,.browser-button { min-height:44px; border-radius:14px; }
+  .browser-help summary { padding:8px 0; }
+  .scan-status { padding:10px 4px; min-height:48px; }
+  .gallery-copy { min-width:0; }
+  .gallery-copy strong { font-size:15px; line-height:1.35; }
+  .upload { border-radius:16px; }
+}
+@media(max-width:360px) {
+  main { padding:16px 12px; }
+  h1 { font-size:25px; }
+  .actions { gap:6px; }
+  .actions button,.browser-button { font-size:12px; padding:8px 10px; }
+}
